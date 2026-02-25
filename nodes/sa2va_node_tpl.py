@@ -15,6 +15,7 @@ from PIL import Image
 
 from .. import be_quiet  # Import global config from root __init__.py
 
+
 # -----------------------------------------------------------------------------
 # Global in-process cache (persists across ComfyUI executions as long as the
 # Python process stays alive). This fixes cases where ComfyUI recreates node
@@ -1049,9 +1050,12 @@ class Sa2VANodeTpl:
         try:
             # Timing instrumentation to pinpoint slow stages (model load vs preprocessing vs inference vs postprocessing)
             _t_start_total = time.perf_counter()
-
+            
             # Load model if not already loaded
             _t0 = time.perf_counter()
+            import folder_paths
+            sa2va_dirs = folder_paths.get_folder_paths("sa2va")
+            cache_dir = sa2va_dirs
             model_loaded = self.load_model(
                 model_name, use_flash_attn, dtype, cache_dir, use_8bit_quantization
             )
