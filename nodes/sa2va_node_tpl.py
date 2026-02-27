@@ -1055,7 +1055,8 @@ class Sa2VANodeTpl:
             _t0 = time.perf_counter()
             import folder_paths
             sa2va_dirs = folder_paths.get_folder_paths("sa2va")
-            cache_dir = sa2va_dirs
+            print(f"⚠️ sa2va_dirs= {sa2va_dirs}")
+            cache_dir = sa2va_dirs[0]
             model_loaded = self.load_model(
                 model_name, use_flash_attn, dtype, cache_dir, use_8bit_quantization
             )
